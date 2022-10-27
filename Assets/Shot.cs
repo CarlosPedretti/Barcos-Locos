@@ -14,7 +14,7 @@ public class Shot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown("space"))
         {
             if (Time.time > shotRateTime)
             {

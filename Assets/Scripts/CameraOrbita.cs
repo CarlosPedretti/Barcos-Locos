@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class CameraOrbita : MonoBehaviour
 {
-    private Vector2 angle = new Vector2(90 * Mathf.Deg2Rad, 0);
+    private Vector2 angle = new Vector2(180 * Mathf.Deg2Rad, 0);
     private new Camera camera;
     private Vector2 nearPlaneSize;
 
    public Transform follow;
    public float maxDistance;
    public Vector2 sensitivity;
+
 
     void Start()
     {
