@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Shot : MonoBehaviour
 {
     public GameObject Ship;
@@ -14,6 +16,18 @@ public class Shot : MonoBehaviour
     public float shotRate = 0.5f;
     public int Municiones = 0;
 
+    public AudioSource source;
+    public AudioClip clip;
+
+    public ParticleSystem smoke;
+    public ParticleSystem smoke1;
+    public ParticleSystem smoke2;
+    public ParticleSystem smoke3;
+
+    /*public AudioSource source1;
+    public AudioSource source2;
+    public AudioSource source3;
+    */
     public GameObject Cannon;
     public GameObject Cannon1;
     public GameObject Cannon2;
@@ -21,6 +35,10 @@ public class Shot : MonoBehaviour
 
     private float shotRateTime = 0;
 
+    void Start()
+    {
+
+    }
 
     public void OnTriggerEnter(Collider collision)
     {
@@ -29,6 +47,7 @@ public class Shot : MonoBehaviour
          {
             Destroy(collision.gameObject);
             Municiones = Municiones + 1;
+
          }
     }   
 
@@ -43,6 +62,18 @@ public class Shot : MonoBehaviour
                 Cannon1.GetComponent<Animation>().Play("Cannon1");
                 Cannon2.GetComponent<Animation>().Play("Cannon2");
                 Cannon3.GetComponent<Animation>().Play("Cannon3");
+
+                source.PlayOneShot(clip);
+
+                smoke.Play();
+                smoke1.Play();
+                smoke2.Play();
+                smoke3.Play();
+                /*
+                source1.PlayOneShot(clip);
+                source2.PlayOneShot(clip);
+                source3.PlayOneShot(clip);
+                */
 
                 Municiones = Municiones - 1;
                 if (Time.time > shotRateTime)
