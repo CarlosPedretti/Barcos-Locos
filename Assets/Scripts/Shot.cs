@@ -35,6 +35,15 @@ public class Shot : MonoBehaviour
 
     private float shotRateTime = 0;
 
+
+    public enum ShotType
+    {
+        keyboard,
+        controller
+    };
+
+    public ShotType shotType;
+
     void Start()
     {
 
@@ -54,60 +63,125 @@ public class Shot : MonoBehaviour
 
     void Update()
     {
-         if (Municiones >= 1)
-         {
-            if (Input.GetKeyDown("space"))
+        if (shotType == ShotType.keyboard)
+        {
+            if (Municiones >= 1)
             {
-                Cannon.GetComponent<Animation>().Play("Cannon");
-                Cannon1.GetComponent<Animation>().Play("Cannon1");
-                Cannon2.GetComponent<Animation>().Play("Cannon2");
-                Cannon3.GetComponent<Animation>().Play("Cannon3");
-
-                source.PlayOneShot(clip);
-
-                smoke.Play();
-                smoke1.Play();
-                smoke2.Play();
-                smoke3.Play();
-                /*
-                source1.PlayOneShot(clip);
-                source2.PlayOneShot(clip);
-                source3.PlayOneShot(clip);
-                */
-
-                Municiones = Municiones - 1;
-                if (Time.time > shotRateTime)
+                if (Input.GetKeyDown("space"))
                 {
-                    GameObject newBullet;
-                    GameObject newBullet1;
-                    GameObject newBullet2;
-                    GameObject newBullet3;
+                    Cannon.GetComponent<Animation>().Play("Cannon");
+                    Cannon1.GetComponent<Animation>().Play("Cannon1");
+                    Cannon2.GetComponent<Animation>().Play("Cannon2");
+                    Cannon3.GetComponent<Animation>().Play("Cannon3");
 
-                    newBullet = Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+                    source.PlayOneShot(clip);
 
-                    newBullet.GetComponent<Rigidbody>().AddForce(spawnPoint.forward * shotForce);
+                    smoke.Play();
+                    smoke1.Play();
+                    smoke2.Play();
+                    smoke3.Play();
+                    /*
+                    source1.PlayOneShot(clip);
+                    source2.PlayOneShot(clip);
+                    source3.PlayOneShot(clip);
+                    */
 
-                    newBullet1 = Instantiate(bullet, spawnPoint1.position, spawnPoint1.rotation);
+                    Municiones = Municiones - 1;
+                    if (Time.time > shotRateTime)
+                    {
+                        GameObject newBullet;
+                        GameObject newBullet1;
+                        GameObject newBullet2;
+                        GameObject newBullet3;
 
-                    newBullet1.GetComponent<Rigidbody>().AddForce(spawnPoint1.forward * shotForce);
+                        newBullet = Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
 
-                    newBullet2 = Instantiate(bullet, spawnPoint2.position, spawnPoint2.rotation);
+                        newBullet.GetComponent<Rigidbody>().AddForce(spawnPoint.forward * shotForce);
 
-                    newBullet2.GetComponent<Rigidbody>().AddForce(spawnPoint2.forward * shotForce);
+                        newBullet1 = Instantiate(bullet, spawnPoint1.position, spawnPoint1.rotation);
 
-                    newBullet3 = Instantiate(bullet, spawnPoint3.position, spawnPoint3.rotation);
+                        newBullet1.GetComponent<Rigidbody>().AddForce(spawnPoint1.forward * shotForce);
 
-                    newBullet3.GetComponent<Rigidbody>().AddForce(spawnPoint3.forward * shotForce);
+                        newBullet2 = Instantiate(bullet, spawnPoint2.position, spawnPoint2.rotation);
 
-                    shotRateTime = Time.time + shotRate;
+                        newBullet2.GetComponent<Rigidbody>().AddForce(spawnPoint2.forward * shotForce);
 
-                    Destroy(newBullet, 4);
-                    Destroy(newBullet1, 4);
-                    Destroy(newBullet2, 4);
-                    Destroy(newBullet3, 4);
+                        newBullet3 = Instantiate(bullet, spawnPoint3.position, spawnPoint3.rotation);
+
+                        newBullet3.GetComponent<Rigidbody>().AddForce(spawnPoint3.forward * shotForce);
+
+                        shotRateTime = Time.time + shotRate;
+
+                        Destroy(newBullet, 4);
+                        Destroy(newBullet1, 4);
+                        Destroy(newBullet2, 4);
+                        Destroy(newBullet3, 4);
+                    }
+                }
+
+            }
+        }
+        else
+        {
+            if (shotType == ShotType.controller)
+            {
+                if (Municiones >= 1)
+                {
+                    if (Input.GetButtonDown("Fire3Gamepad"))
+                    {
+                        Cannon.GetComponent<Animation>().Play("Cannon");
+                        Cannon1.GetComponent<Animation>().Play("Cannon1");
+                        Cannon2.GetComponent<Animation>().Play("Cannon2");
+                        Cannon3.GetComponent<Animation>().Play("Cannon3");
+
+                        source.PlayOneShot(clip);
+
+                        smoke.Play();
+                        smoke1.Play();
+                        smoke2.Play();
+                        smoke3.Play();
+                        /*
+                        source1.PlayOneShot(clip);
+                        source2.PlayOneShot(clip);
+                        source3.PlayOneShot(clip);
+                        */
+
+                        Municiones = Municiones - 1;
+                        if (Time.time > shotRateTime)
+                        {
+                            GameObject newBullet;
+                            GameObject newBullet1;
+                            GameObject newBullet2;
+                            GameObject newBullet3;
+
+                            newBullet = Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+
+                            newBullet.GetComponent<Rigidbody>().AddForce(spawnPoint.forward * shotForce);
+
+                            newBullet1 = Instantiate(bullet, spawnPoint1.position, spawnPoint1.rotation);
+
+                            newBullet1.GetComponent<Rigidbody>().AddForce(spawnPoint1.forward * shotForce);
+
+                            newBullet2 = Instantiate(bullet, spawnPoint2.position, spawnPoint2.rotation);
+
+                            newBullet2.GetComponent<Rigidbody>().AddForce(spawnPoint2.forward * shotForce);
+
+                            newBullet3 = Instantiate(bullet, spawnPoint3.position, spawnPoint3.rotation);
+
+                            newBullet3.GetComponent<Rigidbody>().AddForce(spawnPoint3.forward * shotForce);
+
+                            shotRateTime = Time.time + shotRate;
+
+                            Destroy(newBullet, 4);
+                            Destroy(newBullet1, 4);
+                            Destroy(newBullet2, 4);
+                            Destroy(newBullet3, 4);
+                        }
+                    }
+
                 }
             }
+        }
 
-         }
     }
 }

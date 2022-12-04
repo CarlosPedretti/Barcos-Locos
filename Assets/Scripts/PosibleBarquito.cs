@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 
@@ -20,14 +21,49 @@ public class PosibleBarquito : MonoBehaviour
 	public float maxSpeedSteerLimit = 3f;
 
 
+	public enum MovementType
+    {
+		keyboard,
+		controller
+    };
+
+	public MovementType movementType;
+
 	void Update()
     {
-		Movement();
-		Steer();
+		if (movementType == MovementType.keyboard)
+		{
+			verticalInput = Input.GetAxis("Vertical");
+			clampedSpeed = Mathf.Clamp(speed, minSpeedLimit, maxSpeedLimit);
+			movementFactor = Mathf.Lerp(movementFactor, verticalInput, Time.deltaTime / movementThresold);
+			transform.Translate(0.0f, 0.0f, movementFactor * clampedSpeed);
 
+			horizontalInput = Input.GetAxis("Horizontal");
+			clampedSteerSpeed = Mathf.Clamp(steerSpeed, minSpeedSteerLimit, maxSpeedSteerLimit);
+			steerFactor = Mathf.Lerp(steerFactor, horizontalInput * verticalInput, Time.deltaTime / movementThresold);
+			transform.Rotate(0.0f, steerFactor * clampedSteerSpeed, 0.0f);
+		}
+		else
+		{
+			if (movementType == MovementType.controller)
+            {
+				verticalInput = Input.GetAxis("VerticalGamepad");
+				clampedSpeed = Mathf.Clamp(speed, minSpeedLimit, maxSpeedLimit);
+				movementFactor = Mathf.Lerp(movementFactor, verticalInput, Time.deltaTime / movementThresold);
+				transform.Translate(0.0f, 0.0f, movementFactor * clampedSpeed);
+
+				horizontalInput = Input.GetAxis("HorizontalGamepad");
+				clampedSteerSpeed = Mathf.Clamp(steerSpeed, minSpeedSteerLimit, maxSpeedSteerLimit);
+				steerFactor = Mathf.Lerp(steerFactor, horizontalInput * verticalInput, Time.deltaTime / movementThresold);
+				transform.Rotate(0.0f, steerFactor * clampedSteerSpeed, 0.0f);
+			}
+		}
+
+		//Movement();
+		//Steer();
 	}
 
-	void Movement()
+	/*void Movement()
     {
         verticalInput = Input.GetAxis("Vertical");
 		clampedSpeed = Mathf.Clamp(speed, minSpeedLimit, maxSpeedLimit);
@@ -36,12 +72,12 @@ public class PosibleBarquito : MonoBehaviour
 
 	}
 
-	void Steer()
+	/*void Steer()
 	{
 		horizontalInput = Input.GetAxis("Horizontal");
 		clampedSteerSpeed = Mathf.Clamp(steerSpeed, minSpeedSteerLimit, maxSpeedSteerLimit);
 		steerFactor = Mathf.Lerp(steerFactor, horizontalInput * verticalInput, Time.deltaTime / movementThresold);
 		transform.Rotate(0.0f, steerFactor * clampedSteerSpeed, 0.0f);
 
-	}
+	}*/
 }
