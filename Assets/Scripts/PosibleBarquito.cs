@@ -31,7 +31,7 @@ public class PosibleBarquito : MonoBehaviour
 
 	public MovementType movementType;
 
-	void Update()
+	void LateUpdate()
     {
 		if (movementType == MovementType.keyboard)
 		{
