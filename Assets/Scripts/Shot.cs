@@ -36,10 +36,14 @@ public class Shot : MonoBehaviour
     private float shotRateTime = 0;
 
 
+
+
     public enum ShotType
     {
         keyboard,
-        controller
+        controller,
+        controller2,
+        controller3
     };
 
     public ShotType shotType;
@@ -127,7 +131,7 @@ public class Shot : MonoBehaviour
             {
                 if (Municiones >= 1)
                 {
-                    if (Input.GetButtonDown("Fire3Gamepad"))
+                    if (Input.GetButtonDown("FireGamepad"))
                     {
                         Cannon.GetComponent<Animation>().Play("Cannon");
                         Cannon1.GetComponent<Animation>().Play("Cannon1");
@@ -181,6 +185,125 @@ public class Shot : MonoBehaviour
 
                 }
             }
+            else if (shotType == ShotType.controller2)
+            {
+                    if (Municiones >= 1)
+                    {
+                        if (Input.GetButtonDown("FireGamepad P3"))
+                        {
+                            Cannon.GetComponent<Animation>().Play("Cannon");
+                            Cannon1.GetComponent<Animation>().Play("Cannon1");
+                            Cannon2.GetComponent<Animation>().Play("Cannon2");
+                            Cannon3.GetComponent<Animation>().Play("Cannon3");
+
+                            source.PlayOneShot(clip);
+
+                            smoke.Play();
+                            smoke1.Play();
+                            smoke2.Play();
+                            smoke3.Play();
+                            /*
+                            source1.PlayOneShot(clip);
+                            source2.PlayOneShot(clip);
+                            source3.PlayOneShot(clip);
+                            */
+
+                            Municiones = Municiones - 1;
+                            if (Time.time > shotRateTime)
+                            {
+                                GameObject newBullet;
+                                GameObject newBullet1;
+                                GameObject newBullet2;
+                                GameObject newBullet3;
+
+                                newBullet = Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+
+                                newBullet.GetComponent<Rigidbody>().AddForce(spawnPoint.forward * shotForce);
+
+                                newBullet1 = Instantiate(bullet, spawnPoint1.position, spawnPoint1.rotation);
+
+                                newBullet1.GetComponent<Rigidbody>().AddForce(spawnPoint1.forward * shotForce);
+
+                                newBullet2 = Instantiate(bullet, spawnPoint2.position, spawnPoint2.rotation);
+
+                                newBullet2.GetComponent<Rigidbody>().AddForce(spawnPoint2.forward * shotForce);
+
+                                newBullet3 = Instantiate(bullet, spawnPoint3.position, spawnPoint3.rotation);
+
+                                newBullet3.GetComponent<Rigidbody>().AddForce(spawnPoint3.forward * shotForce);
+
+                                shotRateTime = Time.time + shotRate;
+
+                                Destroy(newBullet, 4);
+                                Destroy(newBullet1, 4);
+                                Destroy(newBullet2, 4);
+                                Destroy(newBullet3, 4);
+                            }
+                        }
+
+                    }
+            }
+            else if (shotType == ShotType.controller3)
+            {
+                    if (Municiones >= 1)
+                    {
+                        if (Input.GetButtonDown("FireGamepad P4"))
+                        {
+                            Cannon.GetComponent<Animation>().Play("Cannon");
+                            Cannon1.GetComponent<Animation>().Play("Cannon1");
+                            Cannon2.GetComponent<Animation>().Play("Cannon2");
+                            Cannon3.GetComponent<Animation>().Play("Cannon3");
+
+                            source.PlayOneShot(clip);
+
+                            smoke.Play();
+                            smoke1.Play();
+                            smoke2.Play();
+                            smoke3.Play();
+                            /*
+                            source1.PlayOneShot(clip);
+                            source2.PlayOneShot(clip);
+                            source3.PlayOneShot(clip);
+                            */
+
+                            Municiones = Municiones - 1;
+                            if (Time.time > shotRateTime)
+                            {
+                                GameObject newBullet;
+                                GameObject newBullet1;
+                                GameObject newBullet2;
+                                GameObject newBullet3;
+
+                                newBullet = Instantiate(bullet, spawnPoint.position, spawnPoint.rotation);
+
+                                newBullet.GetComponent<Rigidbody>().AddForce(spawnPoint.forward * shotForce);
+
+                                newBullet1 = Instantiate(bullet, spawnPoint1.position, spawnPoint1.rotation);
+
+                                newBullet1.GetComponent<Rigidbody>().AddForce(spawnPoint1.forward * shotForce);
+
+                                newBullet2 = Instantiate(bullet, spawnPoint2.position, spawnPoint2.rotation);
+
+                                newBullet2.GetComponent<Rigidbody>().AddForce(spawnPoint2.forward * shotForce);
+
+                                newBullet3 = Instantiate(bullet, spawnPoint3.position, spawnPoint3.rotation);
+
+                                newBullet3.GetComponent<Rigidbody>().AddForce(spawnPoint3.forward * shotForce);
+
+                                shotRateTime = Time.time + shotRate;
+
+                                Destroy(newBullet, 4);
+                                Destroy(newBullet1, 4);
+                                Destroy(newBullet2, 4);
+                                Destroy(newBullet3, 4);
+                            }
+                        }
+
+                    }
+            }
+
+
+            
         }
 
     }
