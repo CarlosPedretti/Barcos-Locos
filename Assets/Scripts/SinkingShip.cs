@@ -18,11 +18,11 @@ public class SinkingShip : MonoBehaviour
 
     public PosibleBarquito scriptPosibleBarquito;
 
-
+    public GameObject[] ships;
 
     void Start()
     {
-
+        ships = GameObject.FindGameObjectsWithTag("Ship");
     }
 
 
@@ -42,14 +42,18 @@ public class SinkingShip : MonoBehaviour
 
             scriptPosibleBarquito.enabled = false;
 
-            Hundido.gameObject.SetActive(true);
 
         }
     }
 
     void Update()
     {
+        ships = GameObject.FindGameObjectsWithTag("Ship");
 
+        if (ships.Length == 1)
+        {
+            Hundido.gameObject.SetActive(true);
+        }
     }
 
 }
